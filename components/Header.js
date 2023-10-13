@@ -32,7 +32,7 @@ const Header = () => {
 
   useEffect(() => {
     if (!isLoading && !authUser) {
-      router.push("/login");
+      router.push("/");
     }
   }, [authUser, isLoading]);
 
@@ -115,11 +115,11 @@ const Header = () => {
               <CgProfile className="text-2xl " />
             </div>
           </Link>
-          <Link href="/" onClick={signOut}>
+          <div onClick={signOut}>
             <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
               <MdLogout className="text-2xl" />
             </div>
-          </Link>
+          </div>
           {/* Icon end */}
 
           {/* Mobile icon start */}
