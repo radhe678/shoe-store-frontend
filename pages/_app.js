@@ -8,6 +8,9 @@ import { Provider } from "react-redux";
 import store from "@/store/store";
 import { AuthUserProvider } from "@/firebase/auth";
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function App({ Component, pageProps }) {
   return (
     <>
@@ -31,6 +34,7 @@ export default function App({ Component, pageProps }) {
         <Provider store={store}>
           <Header />
           <Component {...pageProps} />
+          <ToastContainer />
           <Footer />
         </Provider>
       </AuthUserProvider>
