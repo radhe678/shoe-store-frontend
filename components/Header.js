@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import { useAuth } from "@/firebase/auth";
 import { useRouter } from "next/router";
 import Loader from "./Loader";
+import { toast } from "react-toastify";
 
 const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -29,6 +30,24 @@ const Header = () => {
   const { authUser, isLoading, signOut } = useAuth();
 
   const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      toast.success("Logged Out Successfully", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } catch (error) {
+      toast.error("Error logging out");
+    }
+  };
 
   useEffect(() => {
     if (!isLoading && !authUser) {
@@ -115,7 +134,7 @@ const Header = () => {
               <CgProfile className="text-2xl " />
             </div>
           </Link>
-          <div onClick={signOut}>
+          <div onClick={handleLogout}>
             <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
               <MdLogout className="text-2xl" />
             </div>
